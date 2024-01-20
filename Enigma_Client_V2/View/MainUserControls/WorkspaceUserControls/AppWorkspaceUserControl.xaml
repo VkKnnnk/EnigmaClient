@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Enigma_Client_V2.View.MainUserControls.WorkspaceUserControls.AppWorkspaceUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Enigma_Client_V2.View.MainUserControls.WorkspaceUserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="768" d:DesignWidth="1366"
+             d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/WorkspaceUserControlStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="1" Style="{StaticResource whiteLine_borderStyle}" Opacity="1"/>
+        <Grid Grid.Row="1" Margin="15 0 15 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Height="30" Source="{Binding ChangeListboxImg.Source}" Style="{StaticResource refresh_imageStyle}" HorizontalAlignment="Center" x:Name="changeListboxButton" PreviewMouseLeftButtonDown="changeListboxButton_PreviewMouseLeftButtonDown"/>
+            <Image Grid.Column="3" Source="/Resources/Images/AppDesign/refresh_ico.tif" Style="{StaticResource refresh_imageStyle}" HorizontalAlignment="Center" Margin="0 0 30 0" x:Name="refreshButton" PreviewMouseLeftButtonDown="refreshButton_PreviewMouseLeftButtonDown">
+                <Image.LayoutTransform>
+                    <RotateTransform/>
+                </Image.LayoutTransform>
+            </Image>
+        </Grid>
+        <ListBox Grid.Row="2" Margin="30" ItemsSource="{Binding EProgramms}" x:Name="tilesTariffs_listBox" Style="{StaticResource buyTariff_listboxStyle}" ItemContainerStyle="{StaticResource ListBoxtemStyleNoHighlighting}" Visibility="{Binding PlateVisibility}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <!--Игры в виде плиток:-->
+                        <Grid Style="{StaticResource panel_gridStyle}">
+                            <Border Style="{StaticResource container_borderStyle}"/>
+                            <Grid Margin="10" Width="300" Height="150">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="0.5*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" Source="{Binding Img_source}"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontSize="20" MaxWidth="250" Style="{StaticResource wrappingText_textBlockStyle}" HorizontalAlignment="Stretch"/>
+                                <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Запустить" Style="{StaticResource deposit_buttonStyle}" Click="Button_Click"/>
+                            </Grid>
+                        </Grid>
+                        <!--Конец Игры в виде плиток:-->
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Grid.Row="2" x:Name="tableTariffs_listBox" ItemsSource="{Binding EProgramms}" Style="{StaticResource buyTariff_listboxStyle}" ItemContainerStyle="{StaticResource ListBoxtemStyleNoHighlighting}" Visibility="{Binding TableVisibility}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0 5 0 0">
+                        <!--Игры в виде таблицы:-->
+                        <Grid Margin="15 1 15 1" Style="{StaticResource panel_gridStyle}">
+                            <Border CornerRadius="0" Style="{StaticResource container_borderStyle}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding Img_source}"  VerticalAlignment="Center" Height="30" Margin="5"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" MaxWidth="500" Style="{StaticResource wrappingText_textBlockStyle}" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                                <Button Grid.Column="2" Content="Запустить" Style="{StaticResource deposit_buttonStyle}" Margin="5" Click="Button_Click"/>
+
+                            </Grid>
+                        </Grid>
+                        <!--Конец Игры в виде таблицы-->
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,256 @@
+﻿<UserControl x:Class="Enigma_Client_V2.View.MainUserControls.WorkspaceUserControls.MainWorkspaceUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Enigma_Client_V2.Converters"
+             xmlns:maskedTextbox="clr-namespace:WPFMaskedTextBox;assembly=WPFMaskedTextBox"
+             xmlns:local="clr-namespace:Enigma_Client_V2.View.MainUserControls.WorkspaceUserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="768" d:DesignWidth="1366"
+             d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/WorkspaceUserControlStyle.xaml"/>
+                <ResourceDictionary>
+                    <converters:CashConverter x:Key="CashConverter"/>
+                    <converters:SessionTimeLeftConverter x:Key="TimeLeftConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--Центральный верхний контейнер-->
+    <Grid Grid.Row="0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--Контейнер для пользователя (верхний-левый)-->
+        <Grid Grid.Column="0" Style="{StaticResource panel_gridStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource blackContainer_borderStyle}"/>
+            <!--Контейнер для изображения-->
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image Margin="5" Grid.Column="1" Grid.Row="1" Source="/Resources/Images/AppDesign/default_user_ico.tif"/>
+            </Grid>
+            <!--Конец Контейнер для изображения-->
+            <Label Grid.Column="1" Content="{Binding WrkspcUser.Name}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource l1}"/>
+            <!--Контейнер для изображения-->
+            <Grid Grid.Column="2" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="1" Grid.Row="1" Source="/Resources/Images/AppDesign/edit_ico.tif" x:Name="editProfile_button" Style="{StaticResource action_imageStyle}">
+                    <Image.ToolTip>
+                        <ToolTip Style="{StaticResource editProfile_tooltipStyle}"/>
+                    </Image.ToolTip>
+                </Image>
+            </Grid>
+            <!--Конец Контейнер для изображения-->
+        </Grid>
+        <!--Конец Контейнер для пользователя (верхний-левый)-->
+        <!--Контейнер статуса сессии-->
+        <Grid Grid.Row="1" Style="{StaticResource panel_gridStyle}" Visibility="Hidden" x:Name="infoSession_grid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.RowSpan="2" Style="{StaticResource container_borderStyle}"/>
+            <Label Content="ИНФОРМАЦИЯ О ТЕКУЩЕЙ СЕССИИ" Style="{StaticResource black_h2}" Margin="20 20 20 0"/>
+            <StackPanel Grid.Row="1" Margin="20 0 20 20" VerticalAlignment="Center">
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Осталось:" Style="{StaticResource black_l1}"/>
+                    <Label Grid.Column="1" HorizontalAlignment="Right" Content="{Binding CurrentSession.EndSession, Converter={StaticResource TimeLeftConverter}}" Style="{StaticResource black_l1}" ContentStringFormat=" {0} мин."/>
+                </Grid>
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Сессия истекает:" Style="{StaticResource black_l1}"/>
+                    <Label Grid.Column="1" Content="{Binding CurrentSession.EndSession}" HorizontalAlignment="Right" ContentStringFormat="dd.MM.yyyy hh:MM" Style="{StaticResource black_l1}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Активный тариф:" Style="{StaticResource black_l1}"/>
+                    <Label Grid.Column="1" Content="{Binding CurrentSession.IdTariffNavigation.Name}" HorizontalAlignment="Right" Style="{StaticResource black_l1}"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <!--Конец Контейнер статуса сессии-->
+        <!--Контейнер баланс пользователя-->
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="{Binding UserCashRowSpan}" Style="{StaticResource panel_gridStyle}" x:Name="userCashContainer_grid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.85*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.1*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.RowSpan="5" Style="{StaticResource container_borderStyle}"/>
+            <Grid Margin="20 20 20 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="ОСНОВНОЙ СЧЕТ" Style="{StaticResource black_h2}"/>
+                <Grid Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="30">
+                    <Image x:Name="cashRefresh_image" Source="/Resources/Images/AppDesign/black_refresh_ico.tif" Style="{StaticResource action_imageStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="20" Width="20" PreviewMouseLeftButtonDown="cashRefresh_image_PreviewMouseLeftButtonDown" Margin="5">
+                        <Image.LayoutTransform>
+                            <RotateTransform/>
+                        </Image.LayoutTransform>
+                    </Image>
+                    <Grid.ToolTip>
+                        <ToolTip Style="{StaticResource refresh_tooltipStyle}"/>
+                    </Grid.ToolTip>
+                </Grid>
+            </Grid>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20 0 20 0">
+                <Label Content="{Binding WrkspcUser.Cash, Converter={StaticResource CashConverter}}" VerticalAlignment="Center" Style="{StaticResource black_h1}" ContentStringFormat=" {0:#.00}"/>
+                <Label Content="₽" VerticalAlignment="Center" Style="{StaticResource black_l1}" FontSize="30"/>
+            </StackPanel>
+            <Border Grid.Row="2" BorderThickness="0 1 0 0" BorderBrush="Black" Opacity="0.7"/>
+            <Grid Grid.Row="2" Margin="40 30 40 30" x:Name="depositContainer_grid" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Style="{StaticResource blackContainer_borderStyle}" Margin="-10"/>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label Content="Номер карты" Style="{StaticResource depositHeader_labelStyle}" Margin="0 0 0 5"/>
+                    <Grid>
+                        <Border BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="3 0 0 -3" Opacity="0.6"/>
+                        <maskedTextbox:MaskedTextBox Style="{StaticResource input_textboxStyle}" Mask="0000  0000  0000  0000000" Margin="3 0 0 5" KeyDown="MaskedTextBox_KeyDown"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="20 0 10 0">
+                    <Label Content="ММ / ГГГГ" Style="{StaticResource depositHeader_labelStyle}" Margin="0 0 0 2"/>
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="3 0 8 -3" Opacity="0.6"/>
+                        <TextBox Grid.Column="0" Style="{StaticResource input_textboxStyle}" MaxLength="2" KeyDown="TextBox_KeyDown_1"/>
+                        <Label Grid.Column="1" Content="/" Style="{StaticResource depositHeader_labelStyle}"/>
+                        <TextBox Grid.Column="2" Style="{StaticResource input_textboxStyle}" MaxLength="4" KeyDown="TextBox_KeyDown"/>
+                    </Grid>
+                </StackPanel>
+                <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0 7 0 0">
+                        <Label Content="Последние цифры" Margin="0 0 0 -10" Style="{StaticResource depositHeader_labelStyle}"/>
+                        <Label Content=" на обороте карты" Style="{StaticResource depositHeader_labelStyle}"/>
+                    </StackPanel>
+                    <Border Grid.Column="2" VerticalAlignment="Center" BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="0 20 5 0" Opacity="0.6"/>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <StackPanel>
+                            <Label Content="CVV" Style="{StaticResource depositHeader_labelStyle}"/>
+                            <PasswordBox Style="{StaticResource cvv_passwordBox}" Margin="3 0 0 0" KeyDown="PasswordBox_KeyDown"/>
+                        </StackPanel>
+                        <Image Source="/Resources/Images/AppDesign/card_ico.tif" Height="50" Margin="5 5 0 0" VerticalAlignment="Top" Opacity="0.7"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="3" x:Name="inputCashValueContainer_grid" Visibility="Collapsed" Margin="10 0 10 0">
+                <Border Style="{StaticResource blackContainer_borderStyle}" Margin="20" CornerRadius="10"/>
+                <TextBox Text="Введите сумму к пополнению" Opacity="0.5" x:Name="depositPlaceholder_textBox" Style="{StaticResource input_textboxStyle}" Margin="40 20 40 20" IsEnabled="False"/>
+                <TextBox x:Name="deposit_textbox" Style="{StaticResource input_textboxStyle}" Margin="40 20 40 20" TextChanged="deposit_textbox_TextChanged" MaxLength="6" KeyDown="deposit_textbox_KeyDown"/>
+            </Grid>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Button Width="280" Content="ПОПОЛНИТЬ" Style="{StaticResource deposit_buttonStyle}" Margin="20" x:Name="addMoney_button" Click="addMoney_button_Click" Visibility="Hidden"/>
+                <Button Content="↓" Style="{StaticResource deposit_buttonStyle}" Width="40" Margin="0 20 0 20" FontSize="25" x:Name="minMax_button" Click="minMax_button_Click"/>
+            </StackPanel>
+        </Grid>
+        <!--Конец Контейнер баланс пользователя-->
+        <!--Контейнер тарифов (правый)-->
+        <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource panel_gridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="15"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="5"  Style="{StaticResource blackContainer_borderStyle}"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="ТАРИФЫ, ДОСТУПНЫЕ НА ЭТОМ ПК" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource h1}"/>
+            <Image Grid.Row="3" Grid.Column="1" x:Name="refresh_image" Source="/Resources/Images/AppDesign/refresh_ico.tif" PreviewMouseLeftButtonDown="refresh_image_PreviewMouseLeftButtonDown" Style="{StaticResource refresh_imageStyle}">
+                <Image.LayoutTransform>
+                    <RotateTransform/>
+                </Image.LayoutTransform>
+                <Image.ToolTip>
+                    <ToolTip Style="{StaticResource refresh_tooltipStyle}"/>
+                </Image.ToolTip>
+            </Image>
+            <ListBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding SessionTariffs}" Style="{StaticResource tariffs_listboxStyle}" ItemContainerStyle="{StaticResource ListBoxtemStyleNoHighlighting}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#a1a1a1" Opacity="1" BorderThickness="0 0 0 1" Background="Transparent">
+                            <Grid Margin="0 20 0 25">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="{Binding Name}" Style="{StaticResource l1}" FontSize="16"/>
+                                <Label Grid.Column="1" Content="{Binding Sum_price}" Style="{StaticResource l1}" FontSize="16" ContentStringFormat=" {0} ₽" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Border.ToolTip>
+                                <ToolTip Style="{StaticResource tariff_tooltipStyle}"/>
+                            </Border.ToolTip>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <!--Конец Контейнер тарифов (правый)-->
+    </Grid>
+    <!--Конец Центральный верхний контейнер-->
+</UserControl>

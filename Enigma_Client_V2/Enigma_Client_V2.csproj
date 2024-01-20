@@ -1,0 +1,139 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="View\MainUserControls\AuthenticationUserControl.xaml~RF2df4d9c.TMP\**" />
+    <EmbeddedResource Remove="View\MainUserControls\AuthenticationUserControl.xaml~RF2df4d9c.TMP\**" />
+    <None Remove="View\MainUserControls\AuthenticationUserControl.xaml~RF2df4d9c.TMP\**" />
+    <Page Remove="View\MainUserControls\AuthenticationUserControl.xaml~RF2df4d9c.TMP\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\AppDesign\background_1.jpg" />
+    <None Remove="Resources\Images\AppDesign\background_2.tif" />
+    <None Remove="Resources\Images\AppDesign\background_vid.mp4" />
+    <None Remove="Resources\Images\AppDesign\background_vid.wmv" />
+    <None Remove="Resources\Images\AppDesign\black_refresh_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\card_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\closed_eye_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\confirm_lock_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\default_user_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\desktop_ico.png" />
+    <None Remove="Resources\Images\AppDesign\edit_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\enigma_back.tif" />
+    <None Remove="Resources\Images\AppDesign\exit_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\e_logo.tif" />
+    <None Remove="Resources\Images\AppDesign\gamepadPlus_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\games_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\lock_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\logo.tif" />
+    <None Remove="Resources\Images\AppDesign\message_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\opened_eye_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\phone_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\refresh_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\shop_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\table_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\tiles_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\warning_ico.tif" />
+    <None Remove="Resources\Images\AppDesign\white_logo.tif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\AppDesign\background_vid.wmv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.4" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+    <PackageReference Include="WPFMaskedTextBox" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\AppDesign\background_2.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\black_refresh_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\card_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\closed_eye_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\confirm_lock_ico.tif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\default_user_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\desktop_ico.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\edit_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\enigma_back.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\exit_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\e_logo.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\gamepadPlus_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\games_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\lock_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\logo.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\message_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\opened_eye_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\phone_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\refresh_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\shop_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\table_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\tiles_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\warning_ico.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AppDesign\white_logo.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

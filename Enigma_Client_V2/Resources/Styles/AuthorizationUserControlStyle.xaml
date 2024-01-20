@@ -1,0 +1,201 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:wpfx="clr-namespace:WPFMaskedTextBox;assembly=WPFMaskedTextBox">
+
+    <Style TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#2d1175"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#2d1165"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Label" x:Key="l1">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="aboveReg_labelStyleStyle" BasedOn="{StaticResource l1}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="forgetPassword_labelStyle" BasedOn="{StaticResource l1}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Label" x:Key="register_labelStyleStyle" BasedOn="{StaticResource forgetPassword_labelStyle}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Foreground" Value="#4761d5"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    <Style TargetType="TextBox" x:Key="input_textboxStyle">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <ScrollViewer Name="PART_ContentHost"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="wpfx:MaskedTextBox" x:Key="phone_maskedTextboxStyle">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Mask" Value="+7 (000) 000-00-00"/>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <ScrollViewer Name="PART_ContentHost"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="PasswordBox">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="MaxLength" Value="30"/>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <ScrollViewer Name="PART_ContentHost"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Image">
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="Image" x:Key="showpass_imageStyle">
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Visibility" Value="Hidden"/>
+    </Style>
+    <Style TargetType="Border" x:Key="back_borderStyle" >
+        <Setter Property="Opacity" Value="0.25"/>
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="CornerRadius" Value="15"/>
+    </Style>
+    <Style TargetType="Border" x:Key="exception_borderStyle">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="BorderBrush" Value="#fbeefc"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Opacity" Value="0"/>
+    </Style>
+    <Style TargetType="Label" x:Key="exceptionMessage_labelStyle" BasedOn="{StaticResource l1}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="#fbeefc"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="ToolTip">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+    <Style TargetType="ProgressBar">
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Maximum" Value="100" />
+        <Setter Property="Foreground" Value="#2e1e8a" />
+        <Setter Property="Minimum" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="Opacity" Value="0.8" />
+        <Setter Property="Clip">
+            <Setter.Value>
+                <RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,200,15"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Opacity" Value="0.1" />
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style TargetType="Border" x:Key="difficultPasswordException_borderStyle" BasedOn="{StaticResource exception_borderStyle}">
+        <Setter Property="Opacity" Value="0.1"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Width" Value="200" />
+    </Style>
+</ResourceDictionary>

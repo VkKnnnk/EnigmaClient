@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="Enigma_Client_V2.View.WorkspaceUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Enigma_Client_V2.View"
+             mc:Ignorable="d"
+             d:DesignHeight="768" d:DesignWidth="1366"
+             d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Resources/Styles/WorkspaceUserControlStyle.xaml"/>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Resources/Images/AppDesign/background_2.tif" RenderOptions.BitmapScalingMode="HighQuality"/>
+    </UserControl.Background>
+    <!--Главный контейнер-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.13*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Opacity="0.3" CornerRadius="50 0 0 50" Margin="0" Background="Black"/>
+        <!--Левый контейнер-->
+        <Grid ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+            <Image VerticalAlignment="Top" Opacity="0.75" Source="/Resources/Images/AppDesign/white_logo.tif" Style="{StaticResource simpleImg_imageStyle}"/>
+            <Border Grid.Row="1" Style="{StaticResource blackContainer_borderStyle}" CornerRadius="0 15 15 0" Margin="0 0 10 20"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 10 20">
+                <Label Content="{Binding CurrentAppTime}" ContentStringFormat="HH:mm" Style="{StaticResource time_labelStyle}" Cursor="Help">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource date_tooltipStyle}"/>
+                    </Label.ToolTip>
+                </Label>
+                <Border Style="{StaticResource keyboardLayout_borderStyle}" x:Name="changeLayout_border" PreviewMouseLeftButtonDown="changeLayout_border_PreviewMouseLeftButtonDown">
+                    <Label Content="{Binding KeyboardLayout.TwoLetterISOLanguageName}" Style="{StaticResource layout_labelStyle}">
+                        <Label.ToolTip>
+                            <ToolTip Style="{StaticResource layout_tooltipStyle}"/>
+                        </Label.ToolTip>
+                    </Label>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <!--Конец Левый контейнер-->
+        <!--Центральный контейнер-->
+        <Grid Grid.Column="1" ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="0.25*"/>
+            </Grid.RowDefinitions>
+
+            <!--Контейнер навигации-->
+            <ContentPresenter Grid.Row="0" Content="{Binding UserControl}"/>
+            <!--Конец Контейнер навигации-->
+
+            <!--Нижний контейнер-->
+            <Grid Grid.Row="1" Style="{StaticResource miniPanel_gridStyle}">
+                <Grid Margin="0 0 0 15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Style="{StaticResource miniPanel_gridStyle}" x:Name="desktopButton" PreviewMouseLeftButtonDown="desktopButton_PreviewMouseLeftButtonDown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Background="White" Style="{StaticResource whiteContainer_borderStyle}"/>
+                        <Image Source="/Resources/Images/AppDesign/desktop_ico.png" Style="{StaticResource simpleImg_imageStyle}" Height="70"/>
+                        <Label Grid.Row="1" Content="РАБОЧИЙ СТОЛ" Margin="0" Style="{StaticResource black_h2}" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Style="{StaticResource miniPanel_gridStyle}" x:Name="buyTariffButton_grid" PreviewMouseLeftButtonDown="buyTariffButton_grid_PreviewMouseLeftButtonDown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Background="White" Style="{StaticResource whiteContainer_borderStyle}"/>
+                        <Image Source="/Resources/Images/AppDesign/shop_ico.tif" Style="{StaticResource simpleImg_imageStyle}"/>
+                        <Label Grid.Row="1" Content="КУПИТЬ ТАРИФ" Margin="0" Style="{StaticResource black_h2}" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Column="2" Style="{StaticResource miniPanel_gridStyle}" x:Name="gamesButton_grid" IsEnabled="False" PreviewMouseLeftButtonDown="gamesButton_grid_PreviewMouseLeftButtonDown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Background="White" Style="{StaticResource whiteContainer_borderStyle}"/>
+                        <Image Source="/Resources/Images/AppDesign/games_ico.tif" Style="{StaticResource simpleImg_imageStyle}"/>
+                        <Label Grid.Row="1" Content="ВЫБРАТЬ ИГРУ" Margin="0" Style="{StaticResource black_h2}" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Column="3" Style="{StaticResource miniPanel_gridStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Background="White" Style="{StaticResource whiteContainer_borderStyle}"/>
+                        <Image Source="/Resources/Images/AppDesign/warning_ico.tif" Style="{StaticResource simpleImg_imageStyle}"/>
+                        <Label Grid.Row="1" Content="ОБРАТНАЯ СВЯЗЬ" Margin="0" Style="{StaticResource black_h2}" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Column="4" Style="{StaticResource miniPanel_gridStyle}" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Background="White" Style="{StaticResource whiteContainer_borderStyle}"/>
+                        <Image Source="/Resources/Images/AppDesign/gamepadPlus_ico.tif" Style="{StaticResource simpleImg_imageStyle}"/>
+                        <Label Grid.Row="1" Content="ПРОДЛИТЬ СЕССИЮ" Margin="0" Style="{StaticResource black_h2}" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Column="5" Style="{StaticResource miniPanel_gridStyle}" x:Name="exitButton_grid" PreviewMouseLeftButtonDown="exitButton_grid_PreviewMouseLeftButtonDown" Cursor="Hand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Background="White" Style="{StaticResource whiteContainer_borderStyle}"/>
+                        <Image Source="/Resources/Images/AppDesign/exit_ico.tif" Style="{StaticResource simpleImg_imageStyle}"/>
+                        <Label Grid.Row="1" Content="ВЫЙТИ ИЗ АККАУНТА" Margin="0" Style="{StaticResource black_h2}" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!--Конец Нижний контейнер-->
+        </Grid>
+        <!--Конец Центральный контейнер-->
+    </Grid>
+    <!--Конец Главный контейнер-->
+</UserControl>

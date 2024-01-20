@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="Enigma_Client_V2.View.AuthorizationUserControls.AuthUserControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:wpfx="clr-namespace:WPFMaskedTextBox;assembly=WPFMaskedTextBox"
+      xmlns:local="clr-namespace:Enigma_Client_V2.View.AuthorizationUserControls"
+      mc:Ignorable="d"
+      d:DesignHeight="500" d:DesignWidth="400"
+      d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Resources/Styles/AuthorizationUserControlStyle.xaml"/>
+    </UserControl.Resources>
+    <!--Главный контейнер-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.12*"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="0.12*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.01*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"  Style="{StaticResource back_borderStyle}"/>
+        <Border Grid.Row="0" x:Name="auth_phoneException_border" Style="{StaticResource exception_borderStyle}"/>
+        <Border Grid.Row="2"  Style="{StaticResource back_borderStyle}"/>
+        <Border Grid.Row="2" x:Name="auth_passwordException_border" Style="{StaticResource exception_borderStyle}"/>
+        <!--Контейнер для логина-->
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <!--Контейнер для изображения (телефон)-->
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="1" Grid.Row="1" Source="/Resources/Images/AppDesign/phone_ico.tif"/>
+            </Grid>
+            <!--Конец Контейнер для изображений (телефон)-->
+            <wpfx:MaskedTextBox Grid.Column="1" Text="{Binding Auth_authdata.Phone}" x:Name="phone_maskedTextbox" CommandManager.PreviewExecuted="phone_maskedTextbox_PreviewExecuted" Style="{StaticResource phone_maskedTextboxStyle}"/>
+        </Grid>
+        <!--Конец контейнер для логина-->
+        <!--Контейнер для пароля-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <!--Контейнер для изображения (замок)-->
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="1" Grid.Row="1" Source="/Resources/Images/AppDesign/lock_ico.tif"/>
+            </Grid>
+            <!--Конец Контейнер для изображений (замок)-->
+            <TextBox Grid.Column="1" Text="Введите пароль" Opacity="0.5" x:Name="auth_password_placeholder" Style="{StaticResource input_textboxStyle}" IsEnabled="False"/>
+            <DockPanel Grid.Column="1">
+                <TextBox x:Name="auth_visiblePassword_textbox" Text="{Binding Auth_authdata.Password}" Visibility="Hidden" Style="{StaticResource input_textboxStyle}"
+                         Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DockPanel}, Path=ActualWidth}"/>
+            </DockPanel>
+            <DockPanel Grid.Column="1">
+                <PasswordBox  x:Name="auth_hiddenPassword_passwordbox" PasswordChanged="auth_hiddenPassword_passwordbox_PasswordChanged"
+                              Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DockPanel}, Path=ActualWidth}"/>
+            </DockPanel>
+            <!--Контейнер для изображений (показать пароль)-->
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="1" Grid.Row="1" Source="/Resources/Images/AppDesign/closed_eye_ico.tif" Style="{StaticResource showpass_imageStyle}"
+                   PreviewMouseDown="auth_showPasswordButton_PreviewMouseDown"
+                   PreviewMouseUp="auth_showPasswordButton_PreviewMouseUp"
+                   MouseLeave="auth_showPasswordButton_MouseLeave" x:Name="auth_showPasswordButton">
+                    <Image.ToolTip>
+                        <ToolTip>
+                            <Label Content="Показать пароль" Style="{StaticResource l1}" Opacity="0.9"/>
+                        </ToolTip>
+                    </Image.ToolTip>
+                </Image>
+            </Grid>
+            <!--Конец Контейнер для изображений (показать пароль)-->
+        </Grid>
+        <!--Конец Контейнер для пароль-->
+        <Label Grid.Row="3" Content="Забыли пароль?" VerticalAlignment="Top" Style="{StaticResource forgetPassword_labelStyle}" PreviewMouseLeftButtonDown="Label_PreviewMouseLeftButtonDown"/>
+        <Label Grid.Row="3" x:Name="auth_message_label" Style="{StaticResource exceptionMessage_labelStyle}"/>
+        <Button Grid.Row="3" x:Name="LogIn_button" IsDefault="True" Content="ВОЙТИ" VerticalAlignment="Bottom" Click="LogIn_button_Click"/>
+    </Grid>
+    <!--Конец Главный контейнер-->
+</UserControl>

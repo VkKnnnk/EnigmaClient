@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Enigma_Client_V2.View.AuthenticationUserControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Enigma_Client_V2.View"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:uc="clr-namespace:Enigma_Client_V2.View.AuthorizationUserControls"
+        xmlns:converters="clr-namespace:Enigma_Client_V2.Converters"
+        mc:Ignorable="d" IsTabStop="True" Focusable="True"
+        d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        d:DesignHeight="768" d:DesignWidth="1366">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/AuthenticationUserControlStyle.xaml"/>
+                <ResourceDictionary>
+                    <converters:VideoPathConverter x:Key="VideoPathConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <VisualBrush>
+            <VisualBrush.Visual>
+                <Viewbox Grid.ColumnSpan="2" Stretch="Fill">
+                    <MediaElement x:Name="videoBackground_mediaElement" LoadedBehavior="Manual" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Converter={StaticResource VideoPathConverter}}" MediaEnded="videoBackground_mediaElement_MediaEnded"/>
+                </Viewbox>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </UserControl.Background>
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.105*"/>
+        </Grid.RowDefinitions>
+        <Border Background="Black" Grid.Column="1" Grid.Row="1" CornerRadius="30" Opacity="0.75"/>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="Transparent" ShowGridLines="True" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50 50 0 0">
+            <Border Background="Black" Style="{StaticResource infoPC_borderStyle}"/>
+            <StackPanel Margin="40 50 40 50" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="{Binding currentPC.IdComp}" Style="{StaticResource h1}" PreviewMouseDoubleClick="Label_PreviewMouseDoubleClick"/>
+                <Label Content="{Binding currentPC.IdTypeTariffsNavigation.Name}" Style="{StaticResource h2}"/>
+            </StackPanel>
+        </Grid>
+        <!--Центральный контейнер-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.25*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.05*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" Grid.Column="1"  Source="/Resources/Images/AppDesign/e_logo.tif"/>
+            <ContentPresenter Grid.Row="1" Grid.Column="1" Content="{Binding UserControl}"/>
+            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Visibility="Visible" x:Name="regAction_stackpanel">
+                <Label Grid.Column="1" Content="У вас нет аккаунта?" Style="{StaticResource aboveReg_labelStyle}"/>
+                <Label Grid.Column="1" Content="Зарегистриуйтесь" Style="{StaticResource register_labelStyle}" x:Name="regButton_label" PreviewMouseLeftButtonDown="regButton_label_PreviewMouseLeftButtonDown"/>
+            </StackPanel>
+            <Button Grid.Row="2" Grid.Column="1" Content="ВЕРНУТЬСЯ НА ГЛАВНУЮ" Visibility="Hidden" x:Name="goBack_button" Click="goBack_button_Click"/>
+        </Grid>
+        <!--Конец Центральный контейнер-->
+        <!--Нижний контейнер-->
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0">
+            <Label Content="{Binding CurrentAppTime}" ContentStringFormat="HH:mm" Style="{StaticResource time_labelStyle}">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource date_tooltipStyle}"/>
+                </Label.ToolTip>
+            </Label>
+            <Border Style="{StaticResource keyboardLayout_borderStyle}" x:Name="changeLayout_border" PreviewMouseLeftButtonDown="changeLayout_border_PreviewMouseLeftButtonDown">
+                <Label Content="{Binding KeyboardLayout.TwoLetterISOLanguageName}" Style="{StaticResource layout_labelStyle}">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource layout_tooltipStyle}" />
+                    </Label.ToolTip>
+                </Label>
+            </Border>
+        </StackPanel>
+        <!--Конец Нижний контейнер-->
+    </Grid>
+</UserControl>

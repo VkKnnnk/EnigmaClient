@@ -1,0 +1,327 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:maskedTextbox="clr-namespace:WPFMaskedTextBox;assembly=WPFMaskedTextBox"
+>
+    <Style TargetType="Image">
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+    </Style>
+    <Style TargetType="Label" x:Key="l1">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+    <Style TargetType="Image" x:Key="action_imageStyle">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Border" x:Key="container_borderStyle">
+        <Setter Property="Opacity" Value="0.8" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="CornerRadius" Value="25" />
+    </Style>
+    <Style TargetType="Border" BasedOn="{StaticResource container_borderStyle}" x:Key="blackContainer_borderStyle">
+        <Setter Property="Background" Value="Black" />
+        <Setter Property="Opacity" Value="0.5" />
+    </Style>
+    <Style TargetType="Label" x:Key="h1" BasedOn="{StaticResource l1}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style TargetType="Label" x:Key="label_tooltipStyle" BasedOn="{StaticResource l1}">
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style TargetType="ListBox" x:Key="tariffs_listboxStyle">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style TargetType="ToolTip" x:Key="tariff_tooltipStyle">
+        <Setter Property="Placement" Value="Left" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid>
+                        <Border CornerRadius="10" Opacity="0.6" BorderThickness="0" Background="White"/>
+                        <StackPanel Margin="5">
+                            <Label Content="{Binding Duration}" Style="{StaticResource label_tooltipStyle}" ContentStringFormat="Длительность: {0} час(ов)"/>
+                            <Label Content="{Binding IdTypeTariffsNavigation.Name}" Style="{StaticResource label_tooltipStyle}" ContentStringFormat="Входит в: {0}"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ToolTip" x:Key="editProfile_tooltipStyle">
+        <Setter Property="Placement" Value="Top" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid>
+                        <Border CornerRadius="10" Opacity="0.7" BorderThickness="0" Background="White"/>
+                        <Label FontSize="14" Content="Редактировать профиль" Style="{StaticResource label_tooltipStyle}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ToolTip" x:Key="refresh_tooltipStyle">
+        <Setter Property="Placement" Value="Bottom" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid>
+                        <Border CornerRadius="10" Opacity="0.7" BorderThickness="0" Background="White"/>
+                        <Label FontSize="14" Content="Обновить" Style="{StaticResource label_tooltipStyle}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ListBoxtemStyleNoHighlighting" TargetType="ListBoxItem">
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected"/>
+                                <VisualState x:Name="Selected"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused"/>
+                                <VisualState x:Name="Unfocused"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle x:Name="fillColor" Fill="#FFBADDE9" IsHitTestVisible="False"  
+                Opacity="0" RadiusY="1" RadiusX="1"/>
+                        <Rectangle x:Name="fillColor2" Fill="#FFBADDE9" IsHitTestVisible="False"  
+                Opacity="0" RadiusY="1" RadiusX="1"/>
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}"  
+            Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  
+            Margin="{TemplateBinding Padding}"/>
+                        <Rectangle x:Name="FocusVisualElement" RadiusY="1" RadiusX="1" Stroke="#FF6DBDD1"  
+            StrokeThickness="1" Visibility="Collapsed"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Help"/>
+                <Setter Property="IsSelected" Value="True" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource l1}" x:Key="black_h1">
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource black_h1}" x:Key="black_h2">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource l1}" x:Key="black_l1">
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+    <Style TargetType="Grid" x:Key="panel_gridStyle">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="15" />
+    </Style>
+    <Style TargetType="Button" x:Key="deposit_buttonStyle">
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#2d1175"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#2d1165"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Image" BasedOn="{StaticResource action_imageStyle}" x:Key="refresh_imageStyle">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="ToolTip" x:Key="date_tooltipStyle">
+        <Setter Property="Placement" Value="Bottom" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid>
+                        <Border CornerRadius="10" Opacity="0.7" BorderThickness="0" Background="White"/>
+                        <Label Margin="5" Content="{Binding CurrentAppTime}" ContentStringFormat="dd.MM.yyyy dddd" Style="{StaticResource label_tooltipStyle}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Border" BasedOn="{StaticResource container_borderStyle}" x:Key="whiteContainer_borderStyle">
+        <Setter Property="Background" Value="White" />
+    </Style>
+    <Style TargetType="Grid" BasedOn="{StaticResource panel_gridStyle}" x:Key="miniPanel_gridStyle">
+        <Setter Property="Margin" Value="10 0 10 0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Grid.RowSpan" Value="2" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Image" x:Key="simpleImg_imageStyle">
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="wrappingText_textBlockStyle">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Opacity" Value="0.9" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="MaxWidth" Value="100" />
+    </Style>
+    <Style TargetType="ToolTip" x:Key="layout_tooltipStyle">
+        <Setter Property="Placement" Value="Top" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid>
+                        <Border CornerRadius="10" Opacity="0.6" BorderThickness="0" Background="White"/>
+                        <TextBlock Text="{Binding KeyboardLayout.DisplayName}" Style="{StaticResource wrappingText_textBlockStyle}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Border" x:Key="keyboardLayout_borderStyle">
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#2d1175"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource h1}" x:Key="time_labelStyle">
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="Cursor" Value="Help" />
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource h1}" x:Key="layout_labelStyle">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource black_h1}" x:Key="h1_tariff_labelStyle">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource black_l1}" x:Key="l1_tariff_labelStyle">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+    <Style TargetType="ListBox" BasedOn="{StaticResource tariffs_listboxStyle}" x:Key="buyTariff_listboxStyle">
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="Margin" Value="15 10 15 15" />
+    </Style>
+    <Style TargetType="Border" BasedOn="{StaticResource container_borderStyle}" x:Key="whiteLine_borderStyle">
+        <Setter Property="BorderThickness" Value="0 0 0 1" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="Margin" Value="15 0 15 0" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style TargetType="TextBox" x:Key="input_textboxStyle">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <ScrollViewer Name="PART_ContentHost"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="PasswordBox" x:Key="cvv_passwordBox">
+        <Setter Property="FontFamily" Value="Rockwell"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="MaxLength" Value="3" />
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <ScrollViewer Name="PART_ContentHost"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource l1}" x:Key="depositHeader_labelStyle">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+</ResourceDictionary>
