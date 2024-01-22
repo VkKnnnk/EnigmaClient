@@ -71,6 +71,7 @@
         <!--Конец Центральный контейнер-->
         <!--Нижний контейнер-->
         <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0">
+            <Button Content="Закрыть приложение" Padding="10" Click="Button_Click"/>
             <Label Content="{Binding CurrentAppTime}" ContentStringFormat="HH:mm" Style="{StaticResource time_labelStyle}">
                 <Label.ToolTip>
                     <ToolTip Style="{StaticResource date_tooltipStyle}"/>

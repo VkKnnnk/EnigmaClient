@@ -2,6 +2,7 @@
 using Enigma_Client_V2.View_Model;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,6 +30,7 @@ namespace Enigma_Client_V2.View
                 Functions_Dictionary.SetRestrictions();
                 if (!ClientAppConfig.demoStart)
                 {
+                    ClientAppConfig.current_PC = AppSession.Context.Computers.FirstOrDefault();
                     Functions_Dictionary.LoadLocalTariffs();
                     (Application.Current.MainWindow as MainWindow).mainWindow_contentPresenter.Content = new AuthenticationUserControl();
                 }

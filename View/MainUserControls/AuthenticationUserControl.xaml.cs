@@ -129,5 +129,10 @@ namespace Enigma_Client_V2.View
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 }
